@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Funny Question</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      margin-top: 100px;
+      background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #ffdde1);
+      background-size: 400% 400%;
+      animation: gradientBG 8s ease infinite;
+      overflow: hidden;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h2 {
+      font-size: 28px;
+      color: #333;
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 18px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      margin: 10px;
+    }
+
+    #yesBtn {
+      background-color: #4CAF50;
+      color: white;
+      animation: bounce 1.5s infinite;
+    }
+
+    #noBtn {
+      background-color: #f44336;
+      color: white;
+      position: absolute;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    #message {
+      margin-top: 30px;
+      font-size: 26px;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    .show {
+      opacity: 1 !important;
+    }
+
+    /* ❤️ Hearts */
+    .heart {
+      position: absolute;
+      color: red;
+      font-size: 20px;
+      animation: floatUp 4s linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-600px); opacity: 0; }
+    }
+
+    /* 🎉 Confetti */
+    .confetti {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background-color: red;
+      animation: fall 3s linear infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(600px); }
+    }
+
+  </style>
+</head>
+<body>
+
+  <h2>आपको मेरी याद नहीं आती क्या ...? 💭</h2>
+
+  <button id="yesBtn" onclick="celebrate()">आती है</button>
+  <button id="noBtn" onmouseover="moveNo()">नहीं आती</button>
+
+  <div id="message">पता है 😄</div>
+
+  <script>
+    function celebrate() {
+      document.getElementById("message").classList.add("show");
+
+      // 🎉 Confetti
+      for (let i = 0; i < 50; i++) {
+        let conf = document.createElement("div");
+        conf.className = "confetti";
+        conf.style.left = Math.random() * window.innerWidth + "px";
+        conf.style.top = "0px";
+        conf.style.backgroundColor = randomColor();
+        conf.style.animationDuration = (Math.random() * 2 + 2) + "s";
+        document.body.appendChild(conf);
+
+        setTimeout(() => conf.remove(), 3000);
+      }
+    }
+
+    function moveNo() {
+      const btn = document.getElementById("noBtn");
+      const x = Math.random() * (window.innerWidth - 120);
+      const y = Math.random() * (window.innerHeight - 60);
+
+      btn.style.left = x + "px";
+      btn.style.top = y + "px";
+    }
+
+    // ❤️ Floating hearts continuously
+    setInterval(() => {
+      let heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerText = "❤️";
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.top = window.innerHeight + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 4000);
+    }, 300);
+
+    function randomColor() {
+      const colors = ["red", "blue", "yellow", "green", "pink", "orange"];
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
+  </script>
+
+</body>
+</html>
