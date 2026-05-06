@@ -2,12 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Funny Question</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+
   <style>
     body {
-      text-align: center;
+      margin: 0;
       font-family: Arial, sans-serif;
-      margin-top: 100px;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #ffdde1);
       background-size: 400% 400%;
       animation: gradientBG 8s ease infinite;
@@ -20,16 +25,30 @@
       100% { background-position: 0% 50%; }
     }
 
+    /* 📦 Responsive Box */
+    .container {
+      background: white;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      width: 90%;
+      max-width: 350px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
     h2 {
-      font-size: 28px;
+      font-size: 20px;
       color: #333;
+      margin-bottom: 20px;
     }
 
     button {
-      padding: 12px 25px;
-      font-size: 18px;
+      padding: 12px 18px;
+      font-size: 16px;
       border: none;
-      border-radius: 25px;
+      border-radius: 20px;
       cursor: pointer;
       margin: 10px;
     }
@@ -48,12 +67,12 @@
 
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+      50% { transform: translateY(-6px); }
     }
 
     #message {
-      margin-top: 30px;
-      font-size: 26px;
+      margin-top: 20px;
+      font-size: 20px;
       opacity: 0;
       transition: opacity 1s ease;
     }
@@ -66,47 +85,47 @@
     .heart {
       position: absolute;
       color: red;
-      font-size: 20px;
+      font-size: 18px;
       animation: floatUp 4s linear infinite;
     }
 
     @keyframes floatUp {
       0% { transform: translateY(0); opacity: 1; }
-      100% { transform: translateY(-600px); opacity: 0; }
+      100% { transform: translateY(-500px); opacity: 0; }
     }
 
     /* 🎉 Confetti */
     .confetti {
       position: absolute;
-      width: 8px;
-      height: 8px;
-      background-color: red;
+      width: 6px;
+      height: 6px;
       animation: fall 3s linear infinite;
     }
 
     @keyframes fall {
       0% { transform: translateY(0); }
-      100% { transform: translateY(600px); }
+      100% { transform: translateY(500px); }
     }
 
   </style>
 </head>
 <body>
 
-  <h2>Hey Swapnali<br>
-    आपको मेरी याद नहीं आती क्या ...? 💭</h2>
+  <div class="container">
+    <h2>"कैटिंन कडे येतोय"...? 💭</h2>
 
-  <button id="yesBtn" onclick="celebrate()">आती है</button>
-  <button id="noBtn" onmouseover="moveNo()">नहीं आती</button>
+    <button id="yesBtn" onclick="celebrate()">हो</button>
+    <button id="noBtn" onclick="moveNo()">नाही</button>
 
-  <div id="message">पता है 😄</div>
+    <div id="message">"आला की फोन कर..." 😄</div>
+  </div>
 
   <script>
     function celebrate() {
       document.getElementById("message").classList.add("show");
 
       // 🎉 Confetti
-      for (let i = 0; i < 50; i++) {
+      for (let i = 0; i < 40; i++) {
         let conf = document.createElement("div");
         conf.className = "confetti";
         conf.style.left = Math.random() * window.innerWidth + "px";
@@ -121,14 +140,19 @@
 
     function moveNo() {
       const btn = document.getElementById("noBtn");
-      const x = Math.random() * (window.innerWidth - 120);
-      const y = Math.random() * (window.innerHeight - 60);
+      const container = document.querySelector(".container");
+
+      const maxX = container.clientWidth - btn.offsetWidth;
+      const maxY = container.clientHeight - btn.offsetHeight;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
 
       btn.style.left = x + "px";
       btn.style.top = y + "px";
     }
 
-    // ❤️ Floating hearts continuously
+    // ❤️ Floating hearts
     setInterval(() => {
       let heart = document.createElement("div");
       heart.className = "heart";
@@ -138,7 +162,7 @@
       document.body.appendChild(heart);
 
       setTimeout(() => heart.remove(), 4000);
-    }, 300);
+    }, 400);
 
     function randomColor() {
       const colors = ["red", "blue", "yellow", "green", "pink", "orange"];
